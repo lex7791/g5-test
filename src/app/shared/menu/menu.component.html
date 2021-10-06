@@ -1,0 +1,6 @@
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let item of menuList">
+    <a href="#" class="nav-link active" aria-current="page" [routerLinkActive]="linkActiveClass"
+       [routerLink]="[item.link]">{{item.name}}</a>
+  </li>
+</ul>
