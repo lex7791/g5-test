@@ -1,1 +1,20 @@
-<p>table works!</p>
+<h2>Users table</h2>
+
+<app-search (search)="getUsers($event)"></app-search>
+
+<table class="table table-striped mt-4" *ngIf="users.length">
+  <thead>
+  <tr>
+    <th scope="col">Login</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>
+      <a [routerLink]="['/detail', user.login]">{{user.login}}</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!users.length">There are no users</div>

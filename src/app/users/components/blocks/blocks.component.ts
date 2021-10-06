@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
+import {IUser} from '../../models/user.interface';
+import {UsersHttpService} from '../../services/users-http.service';
 
 @Component({
   selector: 'app-blocks',
@@ -7,8 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blocks.component.scss'],
 })
 export class BlocksComponent implements OnInit {
-  constructor() {
+  users: IUser[] = [];
+
+  constructor(private usersHttp: UsersHttpService) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
+
+  /** get user list */
+  getUsers(search): void {
+    this.usersHttp.list(search)
+      .subscribe(users => {
+        this.users = users;
+      });
+  }
 }

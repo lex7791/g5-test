@@ -1,1 +1,11 @@
-<p>blocks works!</p>
+<h2>Users blocks</h2>
+
+<app-search (search)="getUsers($event)"></app-search>
+
+<ul class="list-group mt-4" *ngIf="users.length">
+  <li class="list-group-item" *ngFor="let user of users">
+    <a [routerLink]="['/detail', user.login]">{{user.login}}</a>
+  </li>
+</ul>
+
+<div *ngIf="!users.length">There are no users</div>

@@ -1,0 +1,17 @@
+<h2>User detail</h2>
+
+<div class="card" style="width: 18rem;" *ngIf="user">
+  <img src="{{user.avatar_url}}" class="card-img-top">
+  <div class="card-body">
+    <div>
+      <span class="fw-bold">Login: </span>{{user.login}}  
+    </div>
+    <div>
+      <span class="fw-bold">Type: </span>{{user.type}}
+    </div>
+    <div>
+      <span class="fw-bold">Link: </span>
+      <a [href]="user.html_url" target="_blank">{{user.html_url}}</a>
+    </div>
+  </div>
+</div>

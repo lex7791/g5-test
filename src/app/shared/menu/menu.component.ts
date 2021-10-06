@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {filter} from 'rxjs/operators';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -6,13 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  linkActiveClass: 'active';
   menuList = [
     {name: 'Blocks', link: '/blocks'},
     {name: 'Table', link: '/table'},
   ];
 
-  constructor() { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
   }

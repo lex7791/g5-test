@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlocksComponent } from './components/blocks/blocks.component';
 import { TableComponent } from './components/table/table.component';
-import { DetailsComponent } from './components/details/details.component';
+import { DetailComponent } from './components/detail/detail.component';
 
 const routes: Routes = [
   {
@@ -14,8 +14,8 @@ const routes: Routes = [
     component: TableComponent,
   },
   {
-    path: 'details',
-    component: DetailsComponent,
+    path: 'detail/:userName',
+    component: DetailComponent,
   },
   {
     path: '**',
