@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "g5-test": {
+      "hosting": {
+        "g5-test": [
+          "g5-test"
+        ]
+      }
+    }
+  }
+}
