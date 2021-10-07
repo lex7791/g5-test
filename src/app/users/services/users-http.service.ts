@@ -15,6 +15,10 @@ export class UsersHttpService {
   }
 
   list(text: string = '', limit: number = 20): Observable<IUser[]> {
+    if (!text) {
+      return;
+    }
+    
     const params = {per_page: limit.toString(), q: text};
     return this.http.get(this.userListPath, {params})
       .pipe(

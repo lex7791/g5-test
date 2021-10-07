@@ -1,0 +1,10 @@
+<div class="d-md-inline-flex">
+  <input type="text" class="form-control" [(ngModel)]="text" (keydown.enter)="apply(text)">
+  <button type="button" class="btn btn-outline-primary ms-2" [disabled]="!text" (click)="apply(text)">
+    Search
+  </button>
+
+  <button type="button" class="btn btn-outline-secondary ms-2" [disabled]="!text" (click)="clear()">
+    Clear
+  </button>
+</div>

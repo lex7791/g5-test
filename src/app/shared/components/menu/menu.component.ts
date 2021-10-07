@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {filter} from 'rxjs/operators';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -17,5 +17,4 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

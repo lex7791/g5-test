@@ -1,17 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { MenuComponent } from './menu/menu.component';
+import {NgModule} from '@angular/core';
+import {HeaderComponent} from './components/header/header.component';
+import {MenuComponent} from './components/menu/menu.component';
+import {SearchComponent} from './components/search/search.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LoginComponent} from './components/login/login.component';
+import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import { SearchComponent } from './search/search.component';
-import {FormsModule} from '@angular/forms';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
-  declarations: [HeaderComponent, MenuComponent, SearchComponent],
-  imports: [CommonModule, RouterModule, FormsModule],
+  declarations: [HeaderComponent, MenuComponent, SearchComponent, LoginComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     HeaderComponent,
-    SearchComponent
-  ]
+    SearchComponent,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [AuthService]
 })
-export class SharedModule {}
+export class SharedModule {
+}
