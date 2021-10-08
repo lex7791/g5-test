@@ -2,8 +2,25 @@
   <app-menu></app-menu>
 
   <div class="d-flex justify-content-between align-items-center" *ngIf="auth.user | async as user">
-    <span class="me-2">{{ user.email }}</span>
-    <img *ngIf="user.photoURL" class="avatar img-thumbnail rounded-circle me-4" [src]="user.photoURL" />
-    <button class="btn btn-outline-primary" (click)="logout($event)">Logout</button>
+    <img *ngIf="user.photoURL" class="avatar img-thumbnail rounded-circle" [src]="user.photoURL" />
+
+    <ul class="nav nav-pills">
+      <li class="nav-item dropdown float-right">
+        <span
+          class="nav-link dropdown-toggle"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ user.email }}
+        </span>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#" (click)="logout($event)">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <span class="me-2"></span>
   </div>
 </header>

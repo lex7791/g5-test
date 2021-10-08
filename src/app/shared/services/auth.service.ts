@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
@@ -25,10 +25,15 @@ export class AuthService {
   }
 
   /** login with email */
-  login(email: string): void {
-    this.auth.sendSignInLinkToEmail(email, { url: window.location.href, handleCodeInApp: true }).then(() => {
-      this.storage.set(EMAIL_LOGIN_KEY, email);
-    });
+  login(email: string): Observable<boolean> {
+    const sendLink = this.auth
+      .sendSignInLinkToEmail(email, { url: window.location.href, handleCodeInApp: true })
+      .then(() => {
+        this.storage.set(EMAIL_LOGIN_KEY, email);
+        return true;
+      });
+
+    return from(sendLink);
   }
 
   /** check email confirm link */

@@ -13,6 +13,7 @@ import { ICredentials } from '../../models/auth.interface';
 })
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
+  isEmailSent = false;
 
   constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {}
 
@@ -26,7 +27,9 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     const user: ICredentials = this.formGroup.value;
-    this.auth.login(user.email);
+    this.auth.login(user.email).subscribe((isSent) => {
+      this.isEmailSent = isSent;
+    });
   }
 
   loginGithub(): void {
