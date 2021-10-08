@@ -4,16 +4,16 @@
 
 <table class="table table-striped mt-4" *ngIf="users.length">
   <thead>
-  <tr>
-    <th scope="col">Login</th>
-  </tr>
+    <tr>
+      <th scope="col">Login</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let user of users">
-    <td>
-      <a [routerLink]="['/detail', user.login]">{{user.login}}</a>
-    </td>
-  </tr>
+    <tr *ngFor="let user of users">
+      <td>
+        <a [routerLink]="['/detail', user.login]">{{ user.login }}</a>
+      </td>
+    </tr>
   </tbody>
 </table>
 

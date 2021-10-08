@@ -1,32 +1,31 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {AngularFireAuth} from '@angular/fire/compat/auth';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { ICredentials } from '../models/auth.interface';
 
+/** authentication service */
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient, private auth: AngularFireAuth, private router: Router) {
-  }
+  constructor(private http: HttpClient, private auth: AngularFireAuth, private router: Router) {}
 
   get user(): Observable<firebase.User | null> {
     return this.auth.user;
   }
 
-  login(user): void {
-    this.auth.signInWithEmailAndPassword(user.email, user.password)
-      .then(result => {
-        this.goMain();
-      });
+  login(user: ICredentials): void {
+    this.auth.signInWithEmailAndPassword(user.email, user.password).then(() => {
+      this.goMain();
+    });
   }
 
   loginGithub(): void {
-    this.auth.signInWithPopup(new firebase.auth.GithubAuthProvider())
-      .then((result) => {
-        this.goMain();
-      });
+    this.auth.signInWithPopup(new firebase.auth.GithubAuthProvider()).then(() => {
+      this.goMain();
+    });
   }
 
   goMain(): void {
@@ -38,5 +37,4 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
-
 }
