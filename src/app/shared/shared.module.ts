@@ -11,6 +11,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [HeaderComponent, MenuComponent, SearchComponent, LoginComponent],
@@ -24,6 +25,6 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     AngularFirestoreModule,
   ],
   exports: [HeaderComponent, SearchComponent, FormsModule, ReactiveFormsModule],
-  providers: [AuthService],
+  providers: [AuthService, StorageService],
 })
 export class SharedModule {}

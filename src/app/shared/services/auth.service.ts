@@ -4,34 +4,69 @@ import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
-import { ICredentials } from '../models/auth.interface';
+import { StorageService } from './storage.service';
 
 /** authentication service */
 
+const EMAIL_LOGIN_KEY = 'emailLogin';
+
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient, private auth: AngularFireAuth, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private auth: AngularFireAuth,
+    private router: Router,
+    private storage: StorageService
+  ) {}
 
+  /** get authorized user data */
   get user(): Observable<firebase.User | null> {
     return this.auth.user;
   }
 
-  login(user: ICredentials): void {
-    this.auth.signInWithEmailAndPassword(user.email, user.password).then(() => {
-      this.goMain();
+  /** login with email */
+  login(email: string): void {
+    this.auth.sendSignInLinkToEmail(email, { url: window.location.href, handleCodeInApp: true }).then(() => {
+      this.storage.set(EMAIL_LOGIN_KEY, email);
     });
   }
 
+  /** check email confirm link */
+  checkConfirm(): void {
+    const emailLink = this.router.url;
+
+    this.auth.isSignInWithEmailLink(emailLink).then(() => {
+      const email = this.storage.get(EMAIL_LOGIN_KEY);
+
+      if (!email) {
+        return;
+      }
+
+      this.auth
+        .signInWithEmailLink(email, emailLink)
+        .then(() => {
+          this.storage.remove(EMAIL_LOGIN_KEY);
+          this.goMain();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  /** login with GitHub */
   loginGithub(): void {
     this.auth.signInWithPopup(new firebase.auth.GithubAuthProvider()).then(() => {
       this.goMain();
     });
   }
 
+  /** redirect to main page */
   goMain(): void {
     this.router.navigate(['/']);
   }
 
+  /** logout user */
   logout(): void {
     this.auth.signOut().then(() => {
       this.router.navigate(['login']);

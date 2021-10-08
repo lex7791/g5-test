@@ -17,15 +17,16 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {}
 
   ngOnInit(): void {
+    this.auth.checkConfirm();
+
     this.formGroup = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
     });
   }
 
   login(): void {
     const user: ICredentials = this.formGroup.value;
-    this.auth.login(user);
+    this.auth.login(user.email);
   }
 
   loginGithub(): void {
